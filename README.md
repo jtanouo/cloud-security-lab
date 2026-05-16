@@ -21,7 +21,7 @@ Ce lab vise à acquérir et démontrer une maîtrise pratique des compétences s
 
 ## 🏗️ Architecture du repo
 
-\`\`\`
+```
 cloud-security-lab/
 ├── docs/              # Knowledge base et runbooks
 ├── terraform/         # Modules et environnements
@@ -31,7 +31,7 @@ cloud-security-lab/
 ├── .github/workflows/ # Pipelines CI/CD sécurisés
 ├── audits/            # CIS Benchmark, risk register, remédiations
 └── scripts/           # Helpers et scripts d'audit
-\`\`\`
+```
 
 ## 🚀 Roadmap
 
