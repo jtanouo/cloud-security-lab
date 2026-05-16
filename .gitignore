@@ -42,3 +42,28 @@ terraform.rc
 # Optional: ignore plan files saved before destroying Terraform configuration
 # Uncomment the line below if you want to ignore planout files.
 # planout
+
+# ===== Sécurité : NE JAMAIS commiter ces fichiers =====
+*.tfvars          # Peut contenir des secrets, IDs Azure
+*.tfvars.json
+secrets.yaml
+.env
+.env.*
+credentials.json
+*.pem
+*.key
+*.pfx
+
+# ===== Fichiers OS =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Éditeurs =====
+.vscode/
+.idea/
+*.swp
+
+# ===== Logs =====
+*.log
+logs/
