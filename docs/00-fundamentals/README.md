@@ -5,6 +5,7 @@ Cette section regroupe les concepts de base nécessaires pour comprendre le rest
 ## 📑 Index
 
 - [Concepts cloud essentiels](./01-cloud-concepts.md) ✅
+- [Trousse à outils du projet](./02-tooling.md) ✅
 - [Azure : vue d'ensemble](./02-azure-overview.md) *(à venir)*
 - [Infrastructure as Code : pourquoi et comment](./03-iac-introduction.md) *(à venir)*
 - [Glossaire](./glossary.md) *(à venir)*
