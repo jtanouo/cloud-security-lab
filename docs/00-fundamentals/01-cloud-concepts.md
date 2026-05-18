@@ -22,12 +22,12 @@ Note : OCI (Oracle Cloud Infrastructure) est un 4ème acteur, souvent rencontré
 
 ## Hiérarchie Azure
 
-\`\`\`
+```
 Tenant (Microsoft Entra ID)
 └── Subscription (unité de facturation)
     └── Resource Group (dossier logique régional)
         └── Resources (VM, Storage, etc.)
-\`\`\`
+```
 
 ## Conventions de nommage (CAF Microsoft)
 
