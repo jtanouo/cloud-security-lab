@@ -23,7 +23,7 @@ variable "owner" {
 }
 
 variable "project" {
-  type = string
-  default = "cloud-security-lab"
+  type        = string
+  default     = "cloud-security-lab"
   description = "Propriétaire (pour tagging)"
 }
