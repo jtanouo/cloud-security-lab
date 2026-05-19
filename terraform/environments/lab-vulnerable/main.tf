@@ -57,3 +57,20 @@ resource "random_string" "suffix" {
   special = false
   upper   = false
 }
+
+# -------------------------------------------------------------
+# Containers Blob VOLONTAIREMENT publics
+# -------------------------------------------------------------
+# Écarts CIS introduits volontairement :
+#   - container_access_type = "blob" → tout le monde peut lire les fichiers
+#   - Recommandé : "private" (aucun accès anonyme)
+# -------------------------------------------------------------
+
+resource "azurerm_storage_container" "vulnerable" {
+  for_each = toset(["documents", "images", "logs", "backups"])
+
+  name                  = each.value
+  storage_account_name  = azurerm_storage_account.vulnerable.name
+  container_access_type = "blob"
+
+}
