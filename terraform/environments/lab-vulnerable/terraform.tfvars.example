@@ -1,0 +1,21 @@
+# =============================================================
+# terraform.tfvars.example — MODÈLE
+# =============================================================
+# Copier ce fichier en "terraform.tfvars" et remplir les valeurs.
+#   cp terraform.tfvars.example terraform.tfvars
+# =============================================================
+
+resource_group_name = "rg-xxxxx-dev"        # doit commencer par "rg-"
+location            = "westeurope"          # westeurope | northeurope | francecentral
+environment         = "dev"                 # dev | staging | prod
+project             = "cloud-security-lab"
+owner               = "prenom.nom"
+
+container_names = ["documents", "images", "logs"]
+
+storage_config = {
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  min_tls_version          = "TLS1_0"       # ⚠️ valeur vulnérable (lab)
+  public_network_access    = true           # ⚠️ valeur vulnérable (lab)
+}
