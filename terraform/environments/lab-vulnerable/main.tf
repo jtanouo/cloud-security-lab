@@ -26,26 +26,20 @@ locals {
 # -------------------------------------------------------------
 # Storage Account VOLONTAIREMENT vulnérable
 # -------------------------------------------------------------
-# Écarts CIS introduits volontairement :
-#   - min_tls_version = "TLS1_0"           (devrait être TLS1_2)
-#   - public_network_access_enabled = true (devrait être restreint)
-#   - https_traffic_only_enabled = false   (devrait être true)
-#   - allow_nested_items_to_be_public = true (devrait être false)
-# -------------------------------------------------------------
 
 resource "azurerm_storage_account" "vulnerable" {
   name                = "stseclabvuln${random_string.suffix.result}"
   resource_group_name = data.azurerm_resource_group.main.name
   location            = data.azurerm_resource_group.main.location
 
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
+  account_tier             = var.storage_config.account_tier
+  account_replication_type = var.storage_config.account_replication_type
   account_kind             = "StorageV2"
 
   # ⚠️ Configurations vulnérables (intentionnelles) :
-  min_tls_version                 = "TLS1_0"
+  min_tls_version                 = var.storage_config.min_tls_version
   https_traffic_only_enabled      = false
-  public_network_access_enabled   = true
+  public_network_access_enabled   = var.storage_config.public_network_access
   allow_nested_items_to_be_public = true
 
   tags = local.common_tags
@@ -67,7 +61,7 @@ resource "random_string" "suffix" {
 # -------------------------------------------------------------
 
 resource "azurerm_storage_container" "vulnerable" {
-  for_each = toset(["documents", "images", "logs", "backups"])
+  for_each = toset(var.container_names)
 
   name                  = each.value
   storage_account_name  = azurerm_storage_account.vulnerable.name
