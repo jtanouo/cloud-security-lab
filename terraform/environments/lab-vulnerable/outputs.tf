@@ -32,3 +32,20 @@ output "nsg_dangerous_rules" {
   ]
   description = "Liste des règles NSG dangereuses (pour audit)"
 }
+
+output "key_vault_name" {
+  value       = azurerm_key_vault.vulnerable.name
+  description = "Nom du Key Vault"
+}
+
+output "key_vault_uri" {
+  value       = azurerm_key_vault.vulnerable.vault_uri
+  description = "URI du Keu Vault"
+
+}
+
+output "key_vault_rbac_enabled" {
+  value       = azurerm_key_vault.vulnerable.enable_rbac_authorization
+  description = "Indique si le Key Vault utilise RBAC (false = access policies legacy)"
+
+}
