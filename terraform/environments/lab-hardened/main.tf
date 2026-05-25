@@ -1,40 +1,38 @@
 # =============================================================
-# main.tf — Environnement "lab-hardened"
+# main.tf — lab-hardened
 # =============================================================
-# Ce fichier est un placeholder. Le vrai code arrivera en Phase 2.
-# Pour l'instant, on configure juste le provider Azure.
+# Environnement sécurisé, construit avec les modules secure-*.
 # =============================================================
 
-terraform {
-  required_version = ">= 1.5.0"
+data "azurerm_resource_group" "main" {
+  name = "rg-securitylab-dev"
 
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.100"
-    }
+}
+
+resource "random_string" "suffix" {
+  length  = 6
+  special = false
+  upper   = false
+
+}
+
+locals {
+  common_tags = {
+    project       = "cloud-security-lab"
+    environnement = "dev"
+    owner         = "japhet.tanouo"
+    purpose       = "lab-hardened"
+    managed_by    = "terraform"
   }
 }
 
-# Configuration du provider Azure
-provider "azurerm" {
-  features {}
+# --- Appel du module secure-storage ---
+module "secure_storage" {
+  source = "../../modules/secure-storage"
 
-  # On gère manuellement l'enregistrement des providers
-  # (via "az provider register" - voir session 1.4)
-  # Note : Terraform suggère "resource_provider_registrations" dans son
-  # message d'erreur, mais c'est un bug connu (issue #27110).
-  # Le vrai nom est skip_provider_registration.
-  skip_provider_registration = true
-}
+  storage_account_name = "stseclabhard${random_string.suffix.result}"
+  resource_group_name  = data.azurerm_resource_group.main.name
+  location             = data.azurerm_resource_group.main.location
 
-
-# Pour l'instant, on lit juste les infos du subscription actif.
-# (data = lecture seule, pas de création)
-data "azurerm_client_config" "current" {}
-
-# Output : affiche le subscription ID après terraform apply
-output "current_subscription_id" {
-  value       = data.azurerm_client_config.current.subscription_id
-  description = "ID du subscription Azure actif"
+  tags = local.common_tags
 }
