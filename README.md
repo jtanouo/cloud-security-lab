@@ -37,7 +37,7 @@ cloud-security-lab/
 
 - [x] **Phase 0** — Setup du projet et des outils
 - [x] **Phase 1** — Fondamentaux cloud & Azure
-- [ ] **Phase 2** — Infrastructure as Code avec Terraform
+- [x] **Phase 2** — Infrastructure as Code avec Terraform
 - [ ] **Phase 3** — Évaluation de la posture de sécurité (CSPM, CIS)
 - [ ] **Phase 4** — Sécurisation des pipelines CI/CD
 - [ ] **Phase 5** — IAM, RBAC et secure by default
